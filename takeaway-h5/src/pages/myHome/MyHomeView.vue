@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="home-content"></div>
+    <div class="home-content">首页</div>
     <TabBarView></TabBarView>
   </div>
 </template>
@@ -18,4 +18,15 @@ defineOptions({
 defineExpose({});
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.home {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .home-content {
+    flex: 1;
+    overflow-y: auto;
+  }
+}
+</style>

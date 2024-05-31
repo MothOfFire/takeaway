@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-// import "./style.css";
+import "./common/css/base.scss";
 import App from "./App.vue";
 
 // 导入路由
