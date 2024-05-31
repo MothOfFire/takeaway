@@ -1,0 +1,26 @@
+{
+  "name": "takeaway-h5",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "amfe-flexible": "^2.2.1",
+    "postcss-pxtorem": "5.1.1",
+    "vant": "^4.9.0",
+    "vue": "^3.4.21"
+  },
+  "devDependencies": {
+    "@vant/auto-import-resolver": "^1.2.1",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "sass": "^1.77.3",
+    "unplugin-auto-import": "^0.17.6",
+    "unplugin-vue-components": "^0.27.0",
+    "vite": "^5.2.0",
+    "vite-plugin-commonjs": "^0.10.1"
+  }
+}
