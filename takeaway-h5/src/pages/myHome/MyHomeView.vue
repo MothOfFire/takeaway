@@ -1,9 +1,15 @@
 <template>
-  <div class="">首页</div>
+  <div class="home">
+    <div class="home-content"></div>
+    <TabBarView></TabBarView>
+  </div>
 </template>
 
 <script setup>
 import {} from "vue";
+
+// 引入组件
+import TabBarView from "../../components/tabs/TabBarView.vue";
 // 声明组件中的选项
 defineOptions({
   name: "MyHomeView",
