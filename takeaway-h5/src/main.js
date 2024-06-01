@@ -13,7 +13,7 @@ import SvgIcon from "./components/svgIcon/SvgIcon.vue";
 import router from "./router";
 
 // vant 组件库
-import { Icon } from "vant";
+import { Icon, Tab, Tabs } from "vant";
 
 const app = createApp(App);
 
@@ -24,6 +24,6 @@ app.use(router);
 app.component("SvgIcon", SvgIcon);
 
 // 按需注册 vant 组件
-app.use(Icon);
+app.use(Icon).use(Tab).use(Tabs);
 
 app.mount("#app");

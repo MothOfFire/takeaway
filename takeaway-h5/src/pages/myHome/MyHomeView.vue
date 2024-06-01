@@ -32,6 +32,17 @@
             </div>
           </div>
         </div>
+        <div class="main-content">
+          <van-tabs class="van-tabs">
+            <van-tab
+              v-for="(item, index) in cententNavList"
+              :title="item.tab"
+              :key="index"
+            >
+              <Store :storeList="item.data" />
+            </van-tab>
+          </van-tabs>
+        </div>
       </div>
     </div>
     <TabBarView></TabBarView>
@@ -43,6 +54,7 @@ import { reactive } from "vue";
 
 // 引入组件
 import TabBarView from "../../components/tabs/TabBarView.vue";
+import Store from "./components/Store.vue";
 // 声明组件中的选项
 defineOptions({
   name: "MyHomeView",
@@ -115,11 +127,90 @@ const smallClassify = reactive([
   },
 ]);
 
-//向外暴露的变量和方法
-defineExpose({});
+const cententNavList = reactive([
+  {
+    tab: "天天优惠",
+    data: [
+      {
+        title: "鱼拿酸菜鱼",
+        sales: 2888,
+        price: 98,
+        label: ["门店招牌", "很下饭"],
+      },
+      {
+        title: "隆江猪脚饭",
+        sales: 3689,
+        price: 15,
+        label: ["门店上新", "香喷喷"],
+      },
+      {
+        title: "烤肉拌饭",
+        sales: 9888,
+        price: 15,
+        label: ["门店爆款", "量大管饱"],
+      },
+    ],
+  },
+  {
+    tab: "减配送费",
+    data: [
+      {
+        title: "鱼拿酸菜鱼",
+        sales: 2888,
+        price: 98,
+        label: ["门店招牌", "很下饭"],
+      },
+      {
+        title: "隆江猪脚饭",
+        sales: 3689,
+        price: 15,
+        label: ["门店上新", "香喷喷"],
+      },
+    ],
+  },
+  {
+    tab: "点评高分",
+    data: [
+      {
+        title: "鱼拿酸菜鱼",
+        sales: 2888,
+        price: 98,
+        label: ["门店招牌", "很下饭"],
+      },
+      {
+        title: "隆江猪脚饭",
+        sales: 3689,
+        price: 15,
+        label: ["门店上新", "香喷喷"],
+      },
+    ],
+  },
+  {
+    tab: "会员满减",
+    data: [
+      {
+        title: "鱼拿酸菜鱼",
+        sales: 2888,
+        price: 98,
+        label: ["门店招牌", "很下饭"],
+      },
+      {
+        title: "隆江猪脚饭",
+        sales: 3689,
+        price: 15,
+        label: ["门店上新", "香喷喷"],
+      },
+    ],
+  },
+]);
 </script>
 
 <style lang="scss" scoped>
+// 深度选择器 sass 中使用/deep/会报错，::v-deep 已经弃用，改为 :deep()
+:deep(.van-tabs__wrap) {
+  border-radius: 10px;
+}
+
 .home {
   display: flex;
   flex-direction: column;
@@ -219,6 +310,12 @@ defineExpose({});
               margin: 10px;
             }
           }
+        }
+      }
+
+      .main-content {
+        .van-tabs {
+          padding: 0 20px 10px;
         }
       }
     }
