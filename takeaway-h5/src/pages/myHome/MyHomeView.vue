@@ -19,12 +19,17 @@
           </div>
           <div class="classify">
             <div class="big-classify">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="icon-meishi"></use>
-              </svg>
-              <span>美食</span>
+              <div v-for="(item, index) in bigClassify" :key="index">
+                <SvgIcon :icon="item.icon" class="big-classify__svg" />
+                <span>{{ item.name }}</span>
+              </div>
             </div>
-            <div class="small-classify"></div>
+            <div class="small-classify">
+              <div v-for="(item, index) in smallClassify" :key="index">
+                <SvgIcon :icon="item.icon" class="small-classify__svg" />
+                <span>{{ item.name }}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -34,7 +39,7 @@
 </template>
 
 <script setup>
-import {} from "vue";
+import { reactive } from "vue";
 
 // 引入组件
 import TabBarView from "../../components/tabs/TabBarView.vue";
@@ -42,6 +47,74 @@ import TabBarView from "../../components/tabs/TabBarView.vue";
 defineOptions({
   name: "MyHomeView",
 });
+
+// 声明组件中的变量
+const bigClassify = reactive([
+  {
+    name: "美食外卖",
+    icon: "icon-meishi",
+  },
+  {
+    name: "甜点饮品",
+    icon: "icon-tiandian",
+  },
+  {
+    name: "超市便利",
+    icon: "icon-shangjiadianpu",
+  },
+  {
+    name: "生鲜果蔬",
+    icon: "icon-shuiguo",
+  },
+  {
+    name: "医药健康",
+    icon: "icon-yaopin",
+  },
+]);
+
+const smallClassify = reactive([
+  {
+    name: "粥粉面点",
+    icon: "icon-mianshi1",
+  },
+  {
+    name: "汉堡披萨",
+    icon: "icon-hanbao",
+  },
+  {
+    name: "休闲饮品",
+    icon: "icon-naicha",
+  },
+  {
+    name: "阳光酒会",
+    icon: "icon-a-20230816meishitubiao_zhongcanyanhui-jiuhui",
+  },
+  {
+    name: "炸鸡炸串",
+    icon: "icon-shaokao",
+  },
+  {
+    name: "新鲜水果",
+    icon: "icon-chengzi-01",
+  },
+  {
+    name: "生鲜鱼虾",
+    icon: "icon-haixian",
+  },
+  {
+    name: "日用百货",
+    icon: "icon-xueshengchaoshixiaofei",
+  },
+  {
+    name: "烧鸭卤味",
+    icon: "icon-kaoya",
+  },
+  {
+    name: "全部分类",
+    icon: "icon-quanbu",
+  },
+]);
+
 //向外暴露的变量和方法
 defineExpose({});
 </script>
@@ -51,6 +124,7 @@ defineExpose({});
   display: flex;
   flex-direction: column;
   height: 100%;
+  font-size: 12px;
 
   .home-content {
     flex: 1;
@@ -107,6 +181,44 @@ defineExpose({});
         }
 
         .classify {
+          padding: 20px 0;
+
+          .big-classify {
+            display: flex;
+
+            div {
+              flex: 1;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+            }
+
+            &__svg {
+              width: 50px;
+              height: 50px;
+              margin-bottom: 5px;
+            }
+          }
+
+          .small-classify {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 20px;
+
+            div {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              width: 20%;
+            }
+
+            &__svg {
+              width: 30px;
+              height: 30px;
+              margin: 10px;
+            }
+          }
         }
       }
     }
