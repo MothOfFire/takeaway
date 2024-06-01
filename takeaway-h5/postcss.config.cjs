@@ -14,7 +14,7 @@ module.exports = {
     "postcss-pxtorem": {
       rootValue: 37.5, // 1rem 等于多少像素
       propList: ["*"],
-      selectorBlackList: [],
+      selectorBlackList: [":root"],
     },
   },
 };
