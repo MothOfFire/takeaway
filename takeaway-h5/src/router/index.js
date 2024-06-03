@@ -33,6 +33,11 @@ const router = createRouter({
       name: "mine",
       component: () => import("../pages/mine/MineView.vue"),
     },
+    {
+      path: "/store",
+      name: "store",
+      component: () => import("../pages/myStore/StoreDetail.vue"),
+    },
   ],
 });
 

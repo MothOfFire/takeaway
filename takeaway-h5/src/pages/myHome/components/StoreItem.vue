@@ -1,7 +1,7 @@
 <template>
-  <div class="item">
+  <div class="item" @click="toStore">
     <!-- 左边商品图片区 -->
-    <img src="../../../assets/images/11.jpg" />
+    <img :src="data.pic" />
     <!-- 右边商品信息区 -->
     <div class="item-right">
       <div class="title">
@@ -24,6 +24,9 @@
 
 <script setup>
 import {} from "vue";
+
+import { useRouter } from "vue-router";
+
 // 声明组件中的选项
 defineOptions({
   name: "StoreItem",
@@ -32,6 +35,14 @@ defineOptions({
 const { data } = defineProps({
   data: Object,
 });
+
+const router = useRouter();
+
+// 跳转店铺详情的方法
+const toStore = () => {
+  router.push("./store");
+};
+
 //向外暴露的变量和方法
 defineExpose({});
 </script>

@@ -132,18 +132,21 @@ const cententNavList = reactive([
     tab: "天天优惠",
     data: [
       {
+        pic: "https://img1.baidu.com/it/u=1599947592,1695977044&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=440",
         title: "鱼拿酸菜鱼",
         sales: 2888,
         price: 98,
         label: ["门店招牌", "很下饭"],
       },
       {
+        pic: "https://img1.baidu.com/it/u=1599947592,1695977044&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=440",
         title: "隆江猪脚饭",
         sales: 3689,
         price: 15,
         label: ["门店上新", "香喷喷"],
       },
       {
+        pic: "https://img1.baidu.com/it/u=1599947592,1695977044&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=440",
         title: "烤肉拌饭",
         sales: 9888,
         price: 15,
@@ -155,12 +158,14 @@ const cententNavList = reactive([
     tab: "减配送费",
     data: [
       {
+        pic: "https://img1.baidu.com/it/u=1599947592,1695977044&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=440",
         title: "鱼拿酸菜鱼",
         sales: 2888,
         price: 98,
         label: ["门店招牌", "很下饭"],
       },
       {
+        pic: "https://img1.baidu.com/it/u=1599947592,1695977044&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=440",
         title: "隆江猪脚饭",
         sales: 3689,
         price: 15,
@@ -169,15 +174,18 @@ const cententNavList = reactive([
     ],
   },
   {
+    pic: "https://img1.baidu.com/it/u=1599947592,1695977044&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=440",
     tab: "点评高分",
     data: [
       {
+        pic: "https://img1.baidu.com/it/u=1599947592,1695977044&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=440",
         title: "鱼拿酸菜鱼",
         sales: 2888,
         price: 98,
         label: ["门店招牌", "很下饭"],
       },
       {
+        pic: "https://img1.baidu.com/it/u=1599947592,1695977044&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=440",
         title: "隆江猪脚饭",
         sales: 3689,
         price: 15,
@@ -189,12 +197,14 @@ const cententNavList = reactive([
     tab: "会员满减",
     data: [
       {
+        pic: "https://img1.baidu.com/it/u=1599947592,1695977044&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=440",
         title: "鱼拿酸菜鱼",
         sales: 2888,
         price: 98,
         label: ["门店招牌", "很下饭"],
       },
       {
+        pic: "https://img1.baidu.com/it/u=1599947592,1695977044&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=440",
         title: "隆江猪脚饭",
         sales: 3689,
         price: 15,
