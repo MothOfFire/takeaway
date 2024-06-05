@@ -26,7 +26,7 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
 
 import FoodCard from "../../../components/food/FoodCard.vue";
 // 声明组件中的选项
@@ -59,7 +59,10 @@ const init = () => {
   //   console.log("dataitems", data.items);
 };
 
-init();
+// 挂载的时候初始化
+onMounted(() => {
+  init();
+});
 
 // 导航条点击事件
 const onNavClick = (index) => {

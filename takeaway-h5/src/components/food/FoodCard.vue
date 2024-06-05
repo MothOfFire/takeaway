@@ -2,6 +2,11 @@
   <div class="card-item">
     <!-- 左边图片信息区域 -->
     <div class="left">
+      <van-checkbox
+        :name="cardData.id"
+        v-if="showCheckBox"
+        checked-color="#ffc400"
+      />
       <img :src="cardData.pic" alt="" />
       <div class="text">
         <div class="title">{{ cardData.title }}</div>
@@ -32,11 +37,12 @@ defineOptions({
 });
 
 // 接收父组件传递的参数
-const { cardData, showAdd, onAddClick, onChange } = defineProps({
+const { cardData, showAdd, onAddClick, onChange, showCheckBox } = defineProps({
   cardData: Object,
   showAdd: Boolean,
   onAddClick: Function,
   onChange: Function,
+  showCheckBox: Boolean,
 });
 
 const value = ref(1);

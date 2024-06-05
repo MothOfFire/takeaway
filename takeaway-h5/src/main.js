@@ -25,6 +25,8 @@ import {
   ActionBar,
   ActionBarIcon,
   ActionBarButton,
+  Checkbox,
+  CheckboxGroup,
 } from "vant";
 // 自动引入识别不出来，手动引入 toast 组件样式，
 import "vant/es/toast/style";
@@ -49,6 +51,8 @@ app
   .use(Stepper)
   .use(ActionBar)
   .use(ActionBarIcon)
-  .use(ActionBarButton);
+  .use(ActionBarButton)
+  .use(Checkbox)
+  .use(CheckboxGroup);
 
 app.mount("#app");
