@@ -2,22 +2,37 @@
   <div class="cart-detail">
     <!-- 商品列表 -->
     <div class="content">
-      <van-checkbox-group v-model="data.checked">
+      <van-checkbox-group v-model="data.checkedList" @change="groupChecked">
         <div v-for="(item, index) in store.state.cartList" :key="index">
           <FoodCard
             :cardData="item"
-            :onAddClick="onAddClick"
+            :onChange="onChange"
             :showCheckBox="true"
           />
         </div>
       </van-checkbox-group>
     </div>
     <!-- 结算 -->
+    <van-submit-bar
+      :price="totalPrice * 100"
+      button-text="提交订单"
+      @submit="onSubmit"
+      class="submit-all"
+      button-color="#ffc400"
+    >
+      <van-checkbox
+        v-model="data.isChecked"
+        checked-color="#ffc400"
+        @click="choseAll"
+      >
+        全选
+      </van-checkbox>
+    </van-submit-bar>
   </div>
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { reactive, onMounted, computed } from "vue";
 import { useStore } from "vuex";
 
 import FoodCard from "../../../components/food/FoodCard.vue";
@@ -29,17 +44,69 @@ defineOptions({
 const store = useStore();
 
 const data = reactive({
-  checked: [0], //复选框选中的部分
+  checkedList: [], //复选框选中的部分
+  isChecked: true, //全选
 });
 
-const onAddClick = () => {};
+// 总金额
+const totalPrice = computed(() => {
+  let totalList = store.state.cartList.filter((item) =>
+    data.checkedList.includes(item.id)
+  );
+  let total = 0;
+  totalList.forEach((item) => {
+    total += item.price * item.num;
+  });
+  return total;
+});
+
+// 商品默认选中的初始化
+const initChecked = () => {
+  store.state.cartList.map((item) => {
+    data.checkedList.push(item.id);
+  });
+};
+
+onMounted(() => {
+  initChecked();
+});
+
+// 商品数量的同步
+const onChange = (value, detail) => {
+  store.state.cartList.map((item) => {
+    if (item.id === detail.name) {
+      item.num = value;
+    }
+  });
+};
+
+// 全选按钮
+const choseAll = () => {
+  if (data.checkedList.length !== store.state.cartList.length) {
+    initChecked();
+  } else {
+    data.checkedList = [];
+  }
+};
+
+// 每个复选框的点机事件触发
+const groupChecked = (result) => {
+  if (result.length === store.state.cartList.length) {
+    data.isChecked = true;
+  } else {
+    data.isChecked = false;
+  }
+};
+
+// 结算按钮
+const onSubmit = () => {};
 
 //向外暴露的变量和方法
 defineExpose({});
 </script>
 
 <style lang="scss" scoped>
-.cart-details {
+.cart-detail {
   font-size: 14px;
   flex: 1;
   position: relative;
