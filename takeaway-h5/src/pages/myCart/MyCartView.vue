@@ -1,8 +1,8 @@
 <template>
   <div class="cart">
     <div class="cart-content">
-      <Header title="购物车" />
-      <CartDetail v-if="isShow" />
+      <Header title="购物车" :edit="true" />
+      <CartDetail v-if="isShow" :changeShow="changeShow" />
       <FoodBlank v-else />
     </div>
     <TabBarView></TabBarView>
@@ -33,6 +33,11 @@ const init = () => {
   if (store.state.cartList.length === 0) {
     isShow.value = false;
   }
+};
+
+// 修改商品信息组件是否展示
+const changeShow = (value) => {
+  isShow.value = value;
 };
 
 onMounted(() => {

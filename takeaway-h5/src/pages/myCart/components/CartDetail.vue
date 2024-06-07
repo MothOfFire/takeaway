@@ -19,6 +19,7 @@
       @submit="onSubmit"
       class="submit-all"
       button-color="#ffc400"
+      v-if="data.isDelete"
     >
       <van-checkbox
         v-model="data.isChecked"
@@ -28,6 +29,19 @@
         全选
       </van-checkbox>
     </van-submit-bar>
+    <!-- 编辑的删除导航 -->
+    <div class="edit" v-else>
+      <div class="left">
+        <van-checkbox
+          v-model="data.isChecked"
+          checked-color="#ffc400"
+          @click="choseAll"
+        >
+          全选
+        </van-checkbox>
+      </div>
+      <div class="delete" @click="deleteClick">删除</div>
+    </div>
   </div>
 </template>
 
@@ -36,6 +50,8 @@ import { reactive, onMounted, computed } from "vue";
 import { useStore } from "vuex";
 
 import FoodCard from "../../../components/food/FoodCard.vue";
+import { showFailToast } from "vant";
+import emitter from "../../../utils/evenBus";
 // 声明组件中的选项
 defineOptions({
   name: "CartDetail",
@@ -43,16 +59,20 @@ defineOptions({
 
 const store = useStore();
 
+// 接收父组件传递的数据
+const { changeShow } = defineProps({
+  changeShow: Function,
+});
+
 const data = reactive({
   checkedList: [], //复选框选中的部分
   isChecked: true, //全选
+  isDelete: true, //编辑状态
 });
 
 // 总金额
 const totalPrice = computed(() => {
-  let totalList = store.state.cartList.filter((item) =>
-    data.checkedList.includes(item.id)
-  );
+  let totalList = updateData(2);
   let total = 0;
   totalList.forEach((item) => {
     total += item.price * item.num;
@@ -98,8 +118,49 @@ const groupChecked = (result) => {
   }
 };
 
+// 更新数据
+const updateData = (type) => {
+  return store.state.cartList.filter((item) => {
+    return type === 2
+      ? data.checkedList.includes(item.id)
+      : !data.checkedList.includes(item.id);
+  });
+};
+
 // 结算按钮
-const onSubmit = () => {};
+const onSubmit = () => {
+  if (data.checkedList.length !== 0) {
+    store.commit("pay", updateData(2));
+  } else {
+    showFailToast("请选择要结算的商品");
+  }
+};
+
+// 监听编辑的点击
+emitter.on("edit", () => {
+  data.isDelete = !data.isDelete;
+});
+
+// 删除按钮
+const deleteClick = () => {
+  if (data.checkedList.length) {
+    // 更新删除后购物车的数据
+    store.commit("updateCart", updateData(1));
+
+    // 删除成功后，复选框的选中状态也要更新
+    data.checkedList = [];
+
+    // 购物车无数据时展示空状态
+    if (store.state.cartList.length === 0) {
+      // 修改编辑状态
+      store.commit("editCart");
+      changeShow(false);
+    }
+  } else {
+    // 没有选中的逻辑
+    showFailToast("请选择要删除的商品");
+  }
+};
 
 //向外暴露的变量和方法
 defineExpose({});
@@ -117,7 +178,7 @@ defineExpose({});
     bottom: 48px;
   }
 
-  .buy {
+  .edit {
     position: fixed;
     bottom: 48px;
     right: 0;

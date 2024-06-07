@@ -4,9 +4,9 @@
     <div>
       {{ title }}
     </div>
-    <!-- <div class="edit" v-if="edit" @click="editClick">
-        {{ store.state.edit ? "编辑" : "完成" }}
-    </div> -->
+    <div class="edit" v-if="edit" @click="editClick">
+      {{ store.state.edit ? "编辑" : "完成" }}
+    </div>
   </div>
 </template>
 
@@ -14,12 +14,16 @@
 import {} from "vue";
 
 import { useRouter } from "vue-router";
+import emitter from "../../utils/evenBus";
+import { showFailToast } from "vant";
+import { useStore } from "vuex";
+
 // 声明组件中的选项
 defineOptions({
   name: "Header",
 });
 
-const props = defineProps({
+const { title, edit } = defineProps({
   title: {
     type: String,
     default: "标题",
@@ -31,6 +35,7 @@ const props = defineProps({
 });
 
 const router = useRouter();
+const store = useStore();
 
 // 返回按钮点击事件
 const toBack = () => {
@@ -40,10 +45,10 @@ const toBack = () => {
 // 编辑按钮
 const editClick = () => {
   if (store.state.cartList.length) {
-    store.commit("EDIT");
+    store.commit("editCart");
     emitter.emit("edit");
   } else {
-    Toast.fail("购物车空空如也");
+    showFailToast("购物车空空如也");
   }
 };
 
