@@ -174,8 +174,6 @@ const handlerAddCart = (type) => {
     return;
   }
   store.commit("addCart", newList);
-  // 判断是否为立即购买，是则跳转到订单页面
-  type === "toBuy" ? toOrder() : "";
 };
 
 // 前往购物车
@@ -185,13 +183,24 @@ const toCart = () => {
 
 // 立即购买点击事件
 const toBuy = () => {
-  // 将商品加入购物车
-  handlerAddCart("toBuy");
-};
-
-// 跳转到订单页面
-const toOrder = () => {
-  router.push("./order");
+  // 将商品加入订单列表
+  const newList = [];
+  data.storeData.forEach((item) => {
+    item.data.items?.forEach((item) => {
+      item.children.forEach((item) => {
+        if (item.num > 0) {
+          newList.push(item);
+        }
+      });
+    });
+  });
+  if (newList.length === 0) {
+    showToast("请选择商品");
+    return;
+  }
+  store.commit("updateOrder", newList);
+  // 跳转到订单生成页面
+  router.push("./createorder");
 };
 
 //向外暴露的变量和方法

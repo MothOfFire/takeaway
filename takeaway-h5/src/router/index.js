@@ -38,6 +38,11 @@ const router = createRouter({
       name: "store",
       component: () => import("../pages/myStore/StoreDetail.vue"),
     },
+    {
+      path: "/createorder",
+      name: "createorder",
+      component: () => import("../pages/createOrder/CreateOrder.vue"),
+    },
   ],
 });
 

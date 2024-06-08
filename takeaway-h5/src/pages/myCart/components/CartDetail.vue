@@ -15,7 +15,7 @@
     <!-- 结算 -->
     <van-submit-bar
       :price="totalPrice * 100"
-      button-text="提交订单"
+      button-text="结算"
       @submit="onSubmit"
       class="submit-all"
       button-color="#ffc400"
@@ -48,6 +48,7 @@
 <script setup>
 import { reactive, onMounted, computed } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
 import FoodCard from "../../../components/food/FoodCard.vue";
 import { showFailToast } from "vant";
@@ -58,6 +59,7 @@ defineOptions({
 });
 
 const store = useStore();
+const router = useRouter();
 
 // 接收父组件传递的数据
 const { changeShow } = defineProps({
@@ -130,7 +132,14 @@ const updateData = (type) => {
 // 结算按钮
 const onSubmit = () => {
   if (data.checkedList.length !== 0) {
-    store.commit("pay", updateData(2));
+    store.commit("updateOrder", updateData(2));
+    // 跳转到订单生成页面
+    router.push({
+      path: "/createorder",
+      query: {
+        list: data.checkedList,
+      },
+    });
   } else {
     showFailToast("请选择要结算的商品");
   }

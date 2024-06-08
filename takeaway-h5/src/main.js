@@ -17,6 +17,7 @@ import store from "./store";
 // vant 组件库
 import {
   Icon,
+  Button,
   Tab,
   Tabs,
   Toast,
@@ -28,6 +29,9 @@ import {
   Checkbox,
   CheckboxGroup,
   SubmitBar,
+  Card,
+  ContactCard,
+  Dialog,
 } from "vant";
 // 自动引入识别不出来，手动引入 toast 组件样式，
 import "vant/es/toast/style";
@@ -45,6 +49,7 @@ app.component("SvgIcon", SvgIcon);
 // 按需注册 vant 组件
 app
   .use(Icon)
+  .use(Button)
   .use(Tab)
   .use(Tabs)
   .use(Toast)
@@ -55,6 +60,9 @@ app
   .use(ActionBarButton)
   .use(Checkbox)
   .use(CheckboxGroup)
-  .use(SubmitBar);
+  .use(SubmitBar)
+  .use(Card)
+  .use(ContactCard)
+  .use(Dialog);
 
 app.mount("#app");
