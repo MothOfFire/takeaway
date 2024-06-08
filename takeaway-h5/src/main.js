@@ -35,6 +35,7 @@ import {
 } from "vant";
 // 自动引入识别不出来，手动引入 toast 组件样式，
 import "vant/es/toast/style";
+import "vant/es/dialog/style";
 
 const app = createApp(App);
 
