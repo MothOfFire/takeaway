@@ -71,6 +71,9 @@ let data = reactive({
 // 联系人卡片修改事件
 const onEdit = () => {
   //   console.log("修改联系人");
+  router.push({
+    path: "/address",
+  });
 };
 
 // 用户信息初始化

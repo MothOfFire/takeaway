@@ -43,6 +43,16 @@ const router = createRouter({
       name: "createorder",
       component: () => import("../pages/createOrder/CreateOrder.vue"),
     },
+    {
+      path: "/address",
+      name: "address",
+      component: () => import("../pages/address/Address.vue"),
+    },
+    {
+      path: "/addressedit",
+      name: "addressedit",
+      component: () => import("../pages/address/AddressEdit.vue"),
+    },
   ],
 });
 
