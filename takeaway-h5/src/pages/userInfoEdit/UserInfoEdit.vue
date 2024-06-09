@@ -74,7 +74,7 @@ const initDescribe = () => {
 // 保存
 const save = () => {
   // 判断是否输入了昵称和密码
-  if (data.nickname && data.repossword) {
+  if (data.nickname && data.repassword) {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
     userInfo.nickname = data.nickname;
     userInfo.describe = data.describe;
