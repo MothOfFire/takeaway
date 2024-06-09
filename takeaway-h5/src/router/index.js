@@ -89,6 +89,15 @@ const router = createRouter({
         requireAuth: true,
       },
     },
+    {
+      path: "/userinfoedit",
+      name: "userinfoedit",
+      component: () => import("../pages/userInfoEdit/UserInfoEdit.vue"),
+      meta: {
+        // 需要登录才能访问
+        requireAuth: true,
+      },
+    },
   ],
 });
 
