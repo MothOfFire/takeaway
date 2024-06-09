@@ -1,5 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
+import { showToast } from "vant";
+
 // 静态导入路由组件
 // import MyHomeView from "../pages/myHome/MyHomeView.vue";
 // import MyCartView from "../pages/myCart/MyCartView.vue";
@@ -22,16 +24,29 @@ const router = createRouter({
       path: "/cart",
       name: "cart",
       component: () => import("../pages/myCart/MyCartView.vue"),
+      meta: {
+        // 需要登录才能访问
+        requireAuth: true,
+      },
     },
     {
       path: "/order",
       name: "order",
       component: () => import("../pages/myOrder/MyOrderView.vue"),
+      meta: {
+        // 需要登录才能访问
+        requireAuth: true,
+      },
     },
     {
       path: "/mine",
       name: "mine",
       component: () => import("../pages/mine/MineView.vue"),
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: () => import("../pages/login/Login.vue"),
     },
     {
       path: "/store",
@@ -42,18 +57,44 @@ const router = createRouter({
       path: "/createorder",
       name: "createorder",
       component: () => import("../pages/createOrder/CreateOrder.vue"),
+      meta: {
+        // 需要登录才能访问
+        requireAuth: true,
+      },
     },
     {
       path: "/address",
       name: "address",
       component: () => import("../pages/address/Address.vue"),
+      meta: {
+        // 需要登录才能访问
+        requireAuth: true,
+      },
     },
     {
       path: "/addressedit",
       name: "addressedit",
       component: () => import("../pages/address/AddressEdit.vue"),
+      meta: {
+        // 需要登录才能访问
+        requireAuth: true,
+      },
     },
   ],
+});
+
+// 路由守卫
+router.beforeEach((to, from, next) => {
+  // 判断是否需要登录才能访问
+  if (to.meta.requireAuth) {
+    // 判断是否已经登录
+    if (localStorage.getItem("isLogin") === "1") {
+      next();
+    } else {
+      showToast("请先登录");
+      router.push("/login");
+    }
+  }
 });
 
 // 导出 router
