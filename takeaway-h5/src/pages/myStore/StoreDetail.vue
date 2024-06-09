@@ -43,10 +43,11 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
-
+import { reactive, onMounted } from "vue";
 import { useStore } from "vuex";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
+
+import { getStoreData } from "../../api/api";
 
 import Header from "../../components/header/Header.vue";
 import FoodList from "./components/FoodList.vue";
@@ -58,99 +59,35 @@ defineOptions({
 });
 
 const data = reactive({
-  title: "鱼拿酸菜",
-  img: "https://img1.baidu.com/it/u=1599947592,1695977044&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=440",
-  storeData: [
-    {
-      name: "点菜",
-      data: {
-        name: "点菜",
-        items: [
-          {
-            text: "热销榜",
-            children: [
-              {
-                pic: "https://img1.baidu.com/it/u=1599947592,1695977044&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=440",
-                title: "招牌酸菜鱼",
-                num: 0,
-                price: 25.0,
-                id: 0,
-                add: true,
-              },
-              {
-                pic: "https://img1.baidu.com/it/u=1599947592,1695977044&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=440",
-                title: "藤椒酸菜鱼",
-                num: 0,
-                price: 25.0,
-                id: 1,
-                add: true,
-              },
-            ],
-          },
-          {
-            text: "澳洲肥牛",
-            children: [
-              {
-                pic: "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fbkimg.cdn.bcebos.com%2Fpic%2F8694a4c27d1ed21b0ef4f3137f24cac451da80cb91b8&refer=http%3A%2F%2Fbkimg.cdn.bcebos.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645407747&t=ea2c9f772ba0df3a2d1b00b962875460",
-                title: "酸汤肥牛",
-                num: 0,
-                price: 25.0,
-                id: 0,
-                add: true,
-              },
-              {
-                pic: "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fbkimg.cdn.bcebos.com%2Fpic%2F8694a4c27d1ed21b0ef4f3137f24cac451da80cb91b8&refer=http%3A%2F%2Fbkimg.cdn.bcebos.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645407747&t=ea2c9f772ba0df3a2d1b00b962875460",
-                title: "香辣肥牛",
-                num: 0,
-                price: 25.0,
-                id: 1,
-                add: true,
-              },
-            ],
-          },
-          {
-            text: "超级折扣",
-            children: [
-              {
-                pic: "https://img1.baidu.com/it/u=1599947592,1695977044&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=440",
-                title: "无骨酸菜鱼+肥牛双拼",
-                num: 0,
-                price: 25.0,
-                id: 0,
-                add: true,
-              },
-              {
-                pic: "https://img1.baidu.com/it/u=1599947592,1695977044&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=440",
-                title: "藤椒酸菜鱼",
-                num: 0,
-                price: 25.0,
-                id: 1,
-                add: true,
-              },
-            ],
-          },
-        ],
-      },
-    },
-    {
-      name: "评价",
-      data: {
-        content: "123评价",
-      },
-    },
-    {
-      name: "商家",
-      data: {
-        content: "123商家",
-      },
-    },
-  ],
+  storeData: [],
+  title: "",
+  img: "",
 });
 
 // 声明 vuex 的store
 const store = useStore();
-
 const router = useRouter();
+const route = useRoute();
+
+// 数据请求
+const getStore = () => {
+  getStoreData().then((res) => {
+    if (res.status === 200 && res.data.code === 0) {
+      res.data.data.forEach((item) => {
+        if (item.title === route.query.title) {
+          data.storeData = item.storeData;
+          data.title = item.title;
+          data.img = item.img;
+          console.log(data.storeData);
+        }
+      });
+    }
+  });
+};
+
+onMounted(() => {
+  getStore();
+});
 
 // 跳转客服
 const toChat = () => {

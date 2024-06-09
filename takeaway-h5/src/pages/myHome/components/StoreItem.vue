@@ -40,7 +40,12 @@ const router = useRouter();
 
 // 跳转店铺详情的方法
 const toStore = () => {
-  router.push("./store");
+  router.push({
+    path: "/store",
+    query: {
+      title: data.title,
+    },
+  });
 };
 
 //向外暴露的变量和方法
