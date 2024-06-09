@@ -42,11 +42,20 @@ const router = createRouter({
       path: "/mine",
       name: "mine",
       component: () => import("../pages/mine/MineView.vue"),
+      meta: {
+        // 需要登录才能访问
+        requireAuth: true,
+      },
     },
     {
       path: "/login",
       name: "login",
       component: () => import("../pages/login/Login.vue"),
+    },
+    {
+      path: "/register",
+      name: "register",
+      component: () => import("../pages/register/Register.vue"),
     },
     {
       path: "/store",
@@ -94,6 +103,8 @@ router.beforeEach((to, from, next) => {
       showToast("请先登录");
       router.push("/login");
     }
+  } else {
+    next();
   }
 });
 

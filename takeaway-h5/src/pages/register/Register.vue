@@ -1,6 +1,6 @@
 <template>
-  <div class="login">
-    <Header title="登录" />
+  <div class="register">
+    <Header title="注册" />
     <div class="img">take</div>
     <div class="content">
       <van-form @submit="onSubmit">
@@ -29,7 +29,7 @@
             native-type="submit"
             color="#ffc400"
           >
-            登录
+            注册
           </van-button>
 
           <van-button
@@ -37,10 +37,10 @@
             block
             type="primary"
             color="#ffc400"
-            @click="toRegister"
-            class="register-btn"
+            @click="toLogin"
+            class="login-btn"
           >
-            去注册
+            已有账号，去登录
           </van-button>
         </div>
       </van-form>
@@ -56,7 +56,7 @@ import { useStore } from "vuex";
 import Header from "../../components/header/Header.vue";
 // 声明组件中的选项
 defineOptions({
-  name: "Login",
+  name: "Register",
 });
 
 const store = useStore();
@@ -67,15 +67,14 @@ const userInfo = reactive({
   password: "",
 });
 
-// 登录
+// 注册按钮
 const onSubmit = () => {
-  console.log("login-submit", userInfo);
+  console.log("register-submit", userInfo);
 };
 
-// 注册按钮
-const toRegister = () => {
+const toLogin = () => {
   router.push({
-    path: "/register",
+    path: "/login",
   });
 };
 
@@ -84,7 +83,7 @@ defineExpose({});
 </script>
 
 <style lang="scss" scoped>
-.login {
+.register {
   .img {
     width: 200px;
     height: 200px;
@@ -95,7 +94,8 @@ defineExpose({});
     border-radius: 40px;
     margin: 20px auto;
   }
-  .register-btn {
+
+  .login-btn {
     margin-top: 20px;
   }
 }

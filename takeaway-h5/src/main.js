@@ -34,6 +34,9 @@ import {
   Dialog,
   AddressList,
   AddressEdit,
+  Field,
+  Form,
+  CellGroup,
 } from "vant";
 // 自动引入识别不出来，手动引入 toast 组件样式，
 import "vant/es/toast/style";
@@ -68,6 +71,9 @@ app
   .use(ContactCard)
   .use(Dialog)
   .use(AddressList)
-  .use(AddressEdit);
+  .use(AddressEdit)
+  .use(Field)
+  .use(Form)
+  .use(CellGroup);
 
 app.mount("#app");
