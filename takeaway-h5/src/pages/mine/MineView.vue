@@ -4,9 +4,9 @@
     <div class="mine-content">
       <div class="user-info">
         <div class="info">
-          <img src="../../assets/images/header.jpg" />
+          <img :src="userInfo.avatar" />
           <div class="user-desc">
-            <span>昵称：{{ userInfo.name }}</span>
+            <span>昵称：{{ userInfo.nickname }}</span>
             <span class="name">个性签名：{{ userInfo.describe }}</span>
           </div>
         </div>
@@ -47,14 +47,29 @@ const store = useStore();
 const router = useRouter();
 
 const userInfo = reactive({
-  name: "阿鸡",
+  nickname: "阿鸡",
   describe: "个性签名的信息",
+  avatar: "../../assets/images/header.jpg",
 });
+
+// 初始化数据
+const initUserInfo = () => {
+  const localUserInfo = JSON.parse(localStorage.getItem("userInfo"));
+  if (localUserInfo) {
+    userInfo.nickname = localUserInfo.nickname;
+    userInfo.describe = localUserInfo.describe;
+    // userInfo.avatar = localUserInfo.avatar;
+  }
+};
 
 // 路由跳转
 const togo = (path) => {
   router.push(path);
 };
+
+onMounted(() => {
+  initUserInfo();
+});
 
 //向外暴露的变量和方法
 defineExpose({});

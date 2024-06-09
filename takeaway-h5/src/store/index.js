@@ -30,6 +30,16 @@ export default createStore({
         areaCode: "440106", // 地区编码
       },
     ], // 用户地址列表
+    userInfo: JSON.parse(localStorage.getItem("userInfo")) || [
+      {
+        account: "123456789", // 账号
+        password: "123456", // 密码
+        nickname: "阿鸡", // 昵称
+        describe: "这个人很懒，什么都没有留下", // 个性签名
+        avatar:
+          "https://img1.baidu.com/it/u=129925046,184545045&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500", // 头像
+      },
+    ], // 用户信息列表
   },
   mutations: {
     // 同步方法，使用 commit 调用
@@ -85,6 +95,17 @@ export default createStore({
       if (value.isDefault && state.userAddress.length > 0) {
         state.userAddress[0].isDefault = true;
       }
+    },
+    // 添加用户信息
+    addUserInfo(state, value) {
+      state.userInfo.push(value);
+    },
+    // 修改用户信息
+    updateUserInfo(state, value) {
+      state.userInfo = state.userInfo.map((item) => {
+        // 将修改的地址覆盖原来的信息
+        return item.account === value.account ? value : item;
+      });
     },
   },
   actions: {
